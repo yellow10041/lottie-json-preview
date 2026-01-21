@@ -1,0 +1,228 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    sans-serif;
+  font-size: 13px;
+  color: var(--vscode-foreground, #cccccc);
+  background: var(--vscode-editor-background, #1e1e1e);
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/* Player Container */
+.player-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Background Types */
+.background-transparent {
+  background-image:
+    linear-gradient(45deg, #3c3c3c 25%, transparent 25%),
+    linear-gradient(-45deg, #3c3c3c 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #3c3c3c 75%),
+    linear-gradient(-45deg, transparent 75%, #3c3c3c 75%);
+  background-size: 20px 20px;
+  background-position:
+    0 0,
+    0 10px,
+    10px -10px,
+    -10px 0px;
+  background-color: #2d2d2d;
+}
+
+.background-light {
+  background-color: #ffffff;
+}
+
+.background-dark {
+  background-color: #1e1e1e;
+}
+
+/* Lottie Player */
+.lottie-player {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lottie-container {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.lottie-container svg {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Control Bar */
+.control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: var(--vscode-editorWidget-background, #252526);
+  border-top: 1px solid var(--vscode-editorWidget-border, #454545);
+  min-height: 44px;
+  gap: 16px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Control Buttons */
+.control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 4px;
+  background: var(--vscode-button-secondaryBackground, #3a3d41);
+  color: var(--vscode-button-secondaryForeground, #cccccc);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.15s ease;
+}
+
+.control-btn:hover {
+  background: var(--vscode-button-secondaryHoverBackground, #45494e);
+}
+
+.control-btn.active {
+  background: var(--vscode-button-background, #0e639c);
+  color: var(--vscode-button-foreground, #ffffff);
+}
+
+/* Dropdown Controls */
+.control-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.control-label {
+  color: var(--vscode-descriptionForeground, #9d9d9d);
+  font-size: 12px;
+}
+
+.control-dropdown select {
+  padding: 4px 8px;
+  border: 1px solid var(--vscode-dropdown-border, #454545);
+  border-radius: 4px;
+  background: var(--vscode-dropdown-background, #3c3c3c);
+  color: var(--vscode-dropdown-foreground, #cccccc);
+  font-size: 12px;
+  cursor: pointer;
+  outline: none;
+}
+
+.control-dropdown select:hover {
+  border-color: var(--vscode-focusBorder, #007fd4);
+}
+
+.control-dropdown select:focus {
+  border-color: var(--vscode-focusBorder, #007fd4);
+}
+
+/* File Name */
+.file-name {
+  color: var(--vscode-descriptionForeground, #9d9d9d);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* Error State */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 24px;
+}
+
+.error-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.error-message {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--vscode-errorForeground, #f48771);
+}
+
+.error-hint {
+  color: var(--vscode-descriptionForeground, #9d9d9d);
+  font-size: 13px;
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--vscode-editorWidget-border, #454545);
+  border-top-color: var(--vscode-button-background, #0e639c);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  color: var(--vscode-descriptionForeground, #9d9d9d);
+  font-size: 13px;
+}
