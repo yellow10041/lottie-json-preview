@@ -19,8 +19,9 @@ declare const acquireVsCodeApi: () => {
 const vscode = acquireVsCodeApi();
 
 export type BackgroundType = 'transparent' | 'light' | 'dark';
-export type SpeedType = 0.5 | 1 | 2;
+export type SpeedType = 0.25 | 0.5 | 0.75 | 1 | 2 | 5 | 10;
 export type ZoomType = 'fit' | 100 | 150 | 200;
+export type RendererType = 'svg' | 'canvas';
 
 function App() {
   const [lottieData, setLottieData] = useState<object | null>(null);
@@ -31,6 +32,10 @@ function App() {
   const [speed, setSpeed] = useState<SpeedType>(1);
   const [zoom, setZoom] = useState<ZoomType>('fit');
   const [background, setBackground] = useState<BackgroundType>('transparent');
+  const [progress, setProgress] = useState(0);
+  const [totalFrames, setTotalFrames] = useState(0);
+  const [seekCallback, setSeekCallback] = useState<((progress: number, shouldPlay: boolean) => void) | null>(null);
+  const [renderer, setRenderer] = useState<RendererType>('svg');
 
   const handleMessage = useCallback((event: MessageEvent<VSCodeMessage>) => {
     const message = event.data;
@@ -41,13 +46,17 @@ function App() {
 
       if (message.isValid && message.content) {
         try {
+          console.log(`[Lottie Preview] Received data: ${message.content.length} chars`);
           const data = JSON.parse(message.content);
+          console.log(`[Lottie Preview] Parsed OK, layers: ${data.layers?.length || 0}`);
           setLottieData(data);
-        } catch {
+        } catch (e) {
+          console.error('[Lottie Preview] Parse error:', e);
           setIsValid(false);
           setLottieData(null);
         }
       } else {
+        console.log('[Lottie Preview] No valid content received');
         setLottieData(null);
       }
     }
@@ -94,6 +103,12 @@ function App() {
           isLooping={isLooping}
           speed={speed}
           zoom={zoom}
+          renderer={renderer}
+          onProgress={(p, total) => {
+            setProgress(p);
+            setTotalFrames(total);
+          }}
+          onSeekReady={(seekFn) => setSeekCallback(() => seekFn)}
         />
       </div>
       <ControlBar
@@ -103,11 +118,16 @@ function App() {
         speed={speed}
         zoom={zoom}
         background={background}
+        progress={progress}
+        totalFrames={totalFrames}
+        renderer={renderer}
         onPlayPause={() => setIsPlaying(!isPlaying)}
         onLoopToggle={() => setIsLooping(!isLooping)}
         onSpeedChange={setSpeed}
         onZoomChange={setZoom}
         onBackgroundChange={setBackground}
+        onRendererChange={setRenderer}
+        onSeek={(p) => seekCallback?.(p, isPlaying)}
       />
     </div>
   );

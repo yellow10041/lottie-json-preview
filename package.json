@@ -2,7 +2,7 @@
   "name": "lottie-json-preview",
   "displayName": "Lottie JSON Preview",
   "description": "Preview Lottie animations directly in VS Code with live reload and playback controls",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "yellow10041",
   "icon": "media/icon.png",
   "galleryBanner": {

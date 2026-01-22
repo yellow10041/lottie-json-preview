@@ -20,19 +20,22 @@ export function isLottieObject(json: unknown): boolean {
 
   const obj = json as Record<string, unknown>;
 
-  // Required Lottie properties:
-  // v - version string
-  // fr - frame rate
-  // ip - in point (start frame)
-  // op - out point (end frame)
-  // layers - array of layers
-  return (
-    typeof obj.v === "string" &&
-    typeof obj.fr === "number" &&
-    typeof obj.ip === "number" &&
-    typeof obj.op === "number" &&
-    Array.isArray(obj.layers)
-  );
+  // Lottie files must have:
+  // - v: version (string or number)
+  // - layers: array of layers (required)
+  // 
+  // Optional but common:
+  // - fr: frame rate (number)
+  // - ip: in point (number, defaults to 0)
+  // - op: out point (number)
+  // - w/h: width/height
+
+  const hasVersion = obj.v !== undefined;
+  const hasLayers = Array.isArray(obj.layers);
+  const hasOutPoint = typeof obj.op === "number";
+
+  // Minimal check: must have layers and either version or animation timing
+  return hasLayers && (hasVersion || hasOutPoint);
 }
 
 /**

@@ -33,8 +33,10 @@
 | 🎬 **Auto Preview** | Opens split-view preview automatically when you open a Lottie JSON |
 | ▶️ **Playback Controls** | Play, pause, and control animation speed |
 | 🔁 **Loop Toggle** | Enable or disable looping |
-| ⚡ **Speed Control** | Adjust speed: 0.5x, 1x, 2x |
-| 🔍 **Zoom Options** | Fit to view, 100%, 150%, 200% |
+| ⚡ **Speed Control** | Adjust speed: 0.25x, 0.5x, 0.75x, 1x, 2x, 5x, 10x |
+| 📊 **Timeline** | Interactive progress bar with frame counter |
+| 🔍 **Zoom Options** | Fit to view, 100%, 150%, 200% + mouse wheel zoom |
+| 🖱️ **Pan & Zoom** | Drag to pan, scroll to zoom freely |
 | 🎨 **Background Modes** | Transparent (checkered), Light, Dark |
 | 💾 **Live Reload** | Preview updates as you edit and save |
 
@@ -66,11 +68,16 @@ That's it! No configuration needed.
 
 The control bar at the bottom provides quick access to all features:
 
+- **Timeline** — Click anywhere to seek; shows current frame / total frames
 - **▶️ / ⏸** — Play or pause the animation
 - **🔁** — Toggle loop on/off
-- **Speed** — Select 0.5x, 1x, or 2x playback
-- **Zoom** — Fit to container or scale
+- **Speed** — Select 0.25x, 0.5x, 0.75x, 1x, 2x, 5x, or 10x playback
+- **Zoom** — Fit to container or scale (preset)
 - **BG** — Switch background: Transparent, Light, Dark
+
+**Mouse controls in preview area:**
+- **Scroll** — Zoom in/out freely
+- **Drag** — Pan around the animation
 
 ---
 

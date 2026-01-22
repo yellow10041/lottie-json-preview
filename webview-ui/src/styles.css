@@ -71,29 +71,88 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  user-select: none;
 }
 
 .lottie-container {
-  max-width: 100%;
-  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
 }
 
 .lottie-container svg {
   display: block;
   max-width: 100%;
   max-height: 100%;
+  pointer-events: none;
 }
 
 /* Control Bar */
 .control-bar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 8px 16px;
   background: var(--vscode-editorWidget-background, #252526);
   border-top: 1px solid var(--vscode-editorWidget-border, #454545);
-  min-height: 44px;
-  gap: 16px;
+  gap: 8px;
+}
+
+/* Progress Bar */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--vscode-scrollbarSlider-background, #4e4e4e);
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--vscode-button-background, #0e639c);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.progress-handle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: var(--vscode-button-background, #0e639c);
+  border-radius: 50%;
+  border: 2px solid var(--vscode-editor-background, #1e1e1e);
+  pointer-events: none;
+}
+
+.progress-bar:hover .progress-handle {
+  width: 14px;
+  height: 14px;
+}
+
+.progress-time {
+  font-size: 11px;
+  color: var(--vscode-descriptionForeground, #9d9d9d);
+  min-width: 80px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .control-group {
@@ -225,4 +284,39 @@ body {
 .loading-text {
   color: var(--vscode-descriptionForeground, #9d9d9d);
   font-size: 13px;
+}
+
+/* Lottie Error State */
+.lottie-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 24px;
+}
+
+.lottie-error-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.lottie-error-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--vscode-errorForeground, #f48771);
+}
+
+.lottie-error-message {
+  color: var(--vscode-descriptionForeground, #9d9d9d);
+  font-size: 12px;
+  max-width: 400px;
+  word-break: break-word;
+  font-family: monospace;
+  background: var(--vscode-textBlockQuote-background, #2d2d2d);
+  padding: 8px 12px;
+  border-radius: 4px;
 }

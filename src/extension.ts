@@ -5,9 +5,16 @@ import { isLottieJSON } from "./utils/lottieDetector";
 export function activate(context: vscode.ExtensionContext) {
   // Register the open preview command
   context.subscriptions.push(
-    vscode.commands.registerCommand("lottiePreview.open", () => {
+    vscode.commands.registerCommand("lottiePreview.open", async () => {
       const editor = vscode.window.activeTextEditor;
       if (editor && editor.document.languageId === "json") {
+        // Ensure JSON is in the first column
+        if (editor.viewColumn !== vscode.ViewColumn.One) {
+          await vscode.window.showTextDocument(
+            editor.document,
+            vscode.ViewColumn.One,
+          );
+        }
         const panel = LottiePreviewPanel.createOrShow(context.extensionUri);
         panel.updateForDocument(editor.document);
       } else {
@@ -20,7 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Auto-open preview when a Lottie JSON file becomes active
   context.subscriptions.push(
-    vscode.window.onDidChangeActiveTextEditor((editor) => {
+    vscode.window.onDidChangeActiveTextEditor(async (editor) => {
       if (!editor) return;
 
       const document = editor.document;
@@ -31,6 +38,11 @@ export function activate(context: vscode.ExtensionContext) {
       // Check if it's a valid Lottie file
       const content = document.getText();
       if (!isLottieJSON(content)) return;
+
+      // Ensure JSON is in the first column
+      if (editor.viewColumn !== vscode.ViewColumn.One) {
+        await vscode.window.showTextDocument(document, vscode.ViewColumn.One);
+      }
 
       // Create or update the preview panel
       const panel = LottiePreviewPanel.createOrShow(context.extensionUri);

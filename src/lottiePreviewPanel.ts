@@ -44,7 +44,7 @@ export class LottiePreviewPanel {
   }
 
   public static createOrShow(extensionUri: vscode.Uri): LottiePreviewPanel {
-    const column = vscode.ViewColumn.Beside;
+    const column = vscode.ViewColumn.Two;
 
     // If panel already exists, show it
     if (LottiePreviewPanel.instance) {
